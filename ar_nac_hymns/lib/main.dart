@@ -83,7 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void Function() sharePdf(
-      Map<String, String> l10nStrings, ServiceHymnsData serviceData) {
+    Map<String, String> l10nStrings,
+    ServiceHymnsData serviceData,
+    GlobalKey<State<StatefulWidget>> shareWidget,
+  ) {
     return () async {
       print("Share ...");
       ByteData fontFile =
@@ -107,7 +110,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AddHymTablePage(L10n.of(context).l10nStrings, _printPdf, sharePdf);
+    return AddHymTablePage(
+      L10n.of(context).l10nStrings,
+      _printPdf,
+      sharePdf,
+      shareWidget,
+    );
   }
 
   Widget get twoButtonsMain => Scaffold(
@@ -120,15 +128,21 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             RaisedButton(
                 child: Text(L10n.of(context).text('print_document')),
-                onPressed:
-                    _printPdf(L10n.of(context).l10nStrings, dummyServiceData)),
+                onPressed: _printPdf(
+                  L10n.of(context).l10nStrings,
+                  dummyServiceData,
+                )),
             RaisedButton(
               key: shareWidget,
               child: Text(L10n.of(context).text('share_document')),
-              onPressed:
-                  sharePdf(L10n.of(context).l10nStrings, dummyServiceData),
+              onPressed: sharePdf(
+                L10n.of(context).l10nStrings,
+                dummyServiceData,
+                shareWidget,
+              ),
             )
           ],
         ),
       ));
 }
+

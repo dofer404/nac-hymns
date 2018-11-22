@@ -26,26 +26,64 @@ enum ButtonAction { print, share }
 
 class AddHymTablePage extends StatefulWidget {
   final void Function() Function(
-      Map<String, String> l10nStrings, ServiceHymnsData serviceData) printPdf;
+    Map<String, String> l10nStrings,
+    ServiceHymnsData serviceData,
+  ) printPdf;
+
   final void Function() Function(
-      Map<String, String> l10nStrings, ServiceHymnsData serviceData) sharePdf;
+    Map<String, String> l10nStrings,
+    ServiceHymnsData serviceData,
+    GlobalKey<State<StatefulWidget>> shareWidget,
+  ) sharePdf;
+
+  final GlobalKey<State<StatefulWidget>> shareWidget;
+
   final Map<String, String> l10nStrings;
-  AddHymTablePage(this.l10nStrings, this.printPdf, this.sharePdf);
+
+  AddHymTablePage(
+    this.l10nStrings,
+    this.printPdf,
+    this.sharePdf,
+    this.shareWidget,
+  );
+
   @override
-  _AddHymTablePageState createState() =>
-      _AddHymTablePageState(l10nStrings, this.printPdf, this.sharePdf);
+  _AddHymTablePageState createState() => _AddHymTablePageState(
+        l10nStrings,
+        this.printPdf,
+        this.sharePdf,
+        this.shareWidget,
+      );
 }
 
 class _AddHymTablePageState extends State<AddHymTablePage> {
   void Function() Function(
-      Map<String, String> l10nStrings, ServiceHymnsData serviceData) printPdf;
+    Map<String, String> l10nStrings,
+    ServiceHymnsData serviceData,
+  ) printPdf;
+
   void Function() Function(
-      Map<String, String> l10nStrings, ServiceHymnsData serviceData) sharePdf;
+    Map<String, String> l10nStrings,
+    ServiceHymnsData serviceData,
+    GlobalKey<State<StatefulWidget>> shareWidget,
+  ) sharePdf;
+
   List<HymnInputs> hymnInputs;
+
   Map<String, String> l10nStrings;
+
   List<Widget> hymnInputsWidgets;
-  _AddHymTablePageState(this.l10nStrings, this.printPdf, this.sharePdf);
+
+  GlobalKey<State<StatefulWidget>> shareWidget;
+
   ServiceHymnsData data;
+
+  _AddHymTablePageState(
+    this.l10nStrings,
+    this.printPdf,
+    this.sharePdf,
+    this.shareWidget,
+  );
 
   void initState() {
     super.initState();
@@ -96,7 +134,11 @@ class _AddHymTablePageState extends State<AddHymTablePage> {
         padding: const EdgeInsets.all(0.0),
         child: Builder(
           builder: (context) => RaisedButton(
-                onPressed: () => buttonPress(ButtonAction.print, context),
+                onPressed: () => buttonPress(
+                      ButtonAction.print,
+                      context,
+                      shareWidget,
+                    ),
                 child: Center(
                   child: Row(
                     children: [
@@ -115,7 +157,11 @@ class _AddHymTablePageState extends State<AddHymTablePage> {
         padding: const EdgeInsets.all(0.0),
         child: Builder(
           builder: (context) => RaisedButton(
-                onPressed: () => buttonPress(ButtonAction.share, context),
+                onPressed: () => buttonPress(
+                      ButtonAction.share,
+                      context,
+                      shareWidget,
+                    ),
                 color: Colors.indigoAccent,
                 child: Row(
                   children: [
@@ -179,10 +225,11 @@ class _AddHymTablePageState extends State<AddHymTablePage> {
     );
   }
 
-  void buttonPress(ButtonAction buttonAction, BuildContext context) {
-    // if (hymnController.text.isEmpty) {
-    //   print('Warning! No hymn');
-    // } else {
+  void buttonPress(
+    ButtonAction buttonAction,
+    BuildContext context,
+    GlobalKey<State<StatefulWidget>> shareWidget,
+  ) {
     var newService = new ServiceHymnsData(
       () {
         String s = dateController.text;
@@ -203,12 +250,11 @@ class _AddHymTablePageState extends State<AddHymTablePage> {
         }(),
       ),
     );
-    // Navigator.of(context).pop(newService);
     if (newService != null) {
       if (buttonAction == ButtonAction.print) {
         printPdf(l10nStrings, newService)();
       } else if ((buttonAction == ButtonAction.share)) {
-        sharePdf(l10nStrings, newService)();
+        sharePdf(l10nStrings, newService, shareWidget)();
       }
     }
   }
@@ -335,3 +381,4 @@ class HymnInputs {
         ),
       );
 }
+
