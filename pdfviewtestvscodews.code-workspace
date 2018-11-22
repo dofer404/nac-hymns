@@ -1,0 +1,47 @@
+{
+    "folders": [
+        {
+            "path": "extended_pdf_page"
+        },
+        {
+            "path": "ar_nac_hymns"
+        }
+    ],
+    "settings": {
+        "cSpell.words": [
+            "Boundable",
+            "Crear",
+            "Estrofas",
+            "Fecha",
+            "Himno",
+            "Ingresar",
+            "Mnes",
+            "PDFTTF",
+            "Rect",
+            "Sección",
+            "Servicio",
+            "Stateful",
+            "Uint",
+            "arrepentimiento",
+            "cambio",
+            "cena",
+            "compartir",
+            "comunidad",
+            "descongregación",
+            "difuntos",
+            "documento",
+            "feremp",
+            "fttd",
+            "himnos",
+            "imgs",
+            "imprimir",
+            "inicio",
+            "ltrb",
+            "ltwh",
+            "prédica",
+            "siervo",
+            "textfield",
+            "texto"
+        ]
+    }
+}

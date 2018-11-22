@@ -1,0 +1,21 @@
+{
+    "start": "Inicio",
+    "text": "Texto",
+    "date": "Fecha",
+    "speakerChange": "Cambio Siervo",
+    "endOfPreaching": "Final Prédica",
+    "repentance": "Arrepentimiento",
+    "holyCommunion": "Santa Cena",
+    "community": "Final Comunidad",
+    "descongregation": "Descongregación",
+    "deceased": "Difuntos",
+    "hymn": "Himno",
+    "section": "Sección",
+    "stanzas": "Estrofas",
+    "my_church_hymns_title": "Imprimir mis himnos",
+    "print_document": "Imprimir Documento",
+    "share_document": "Compartir Documento",
+    "addServiceSongsTitle": "Ingresar Himnos de un Servicio",
+    "printDocument": "Imprimir",
+    "shareDocument": "Compartir"
+}
