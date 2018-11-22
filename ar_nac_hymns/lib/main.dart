@@ -97,14 +97,18 @@ class _MyHomePageState extends State<MyHomePage> {
       final pdf = SongsPdfDocument(image, fontFile, l10nStrings, serviceData);
 
       // iPad specific (?) Not tested
-      final RenderBox referenceBox =
+      if (theShareWidget.currentContext != null) {
+        final RenderBox referenceBox =
           shareWidget.currentContext.findRenderObject();
-      final topLeft =
-          referenceBox.localToGlobal(referenceBox.paintBounds.topLeft);
-      final bottomRight =
-          referenceBox.localToGlobal(referenceBox.paintBounds.bottomRight);
-      final bounds = Rect.fromPoints(topLeft, bottomRight);
-      Printing.sharePdf(document: pdf, bounds: bounds);
+        final topLeft =
+            referenceBox.localToGlobal(referenceBox.paintBounds.topLeft);
+        final bottomRight =
+            referenceBox.localToGlobal(referenceBox.paintBounds.bottomRight);
+        final bounds = Rect.fromPoints(topLeft, bottomRight);
+        Printing.sharePdf(document: pdf, bounds: bounds);
+      } else {
+        Printing.sharePdf(document: pdf);
+      }
     };
   }
 
@@ -133,7 +137,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   dummyServiceData,
                 )),
             RaisedButton(
-              key: shareWidget,
               child: Text(L10n.of(context).text('share_document')),
               onPressed: sharePdf(
                 L10n.of(context).l10nStrings,
@@ -145,4 +148,3 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ));
 }
-
